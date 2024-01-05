@@ -1,0 +1,15 @@
+{
+  "name": "python",
+  "version": "1.0.0",
+  "description": "This is the python-backend-part from the Official PaRaMeRoS Website",
+  "main": "terminal.py",
+  "scripts": {
+    "start": "python3 ./terminal.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PaRaMeRoS/Website-Backend"
+  },
+  "author": "Maximilian Gründinger",
+  "license": "MIT"
+}
