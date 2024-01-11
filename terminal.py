@@ -18,7 +18,6 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-
 # import Area
 import time
 import logging
@@ -213,15 +212,21 @@ class User:
             self.write_file(out0, "invalid command")
 
     def command_os(self, command):
-        if check_user_admin(User):
-            com = os.system(command)
+        if "sudo" in command: # disables sudo for normal user
+            if check_user_admin1(User):
+                com = os.system(command)
+                with open(out0, "w") as f:
+                    f.write(com)
+                with open(start0, "w") as f:
+                    f.write("Done!")
             with open(out0, "w") as f:
-                f.write(com)
+                f.write("invalid command")
             with open(start0, "w") as f:
                 f.write("Done!")
         else:
+            com = os.system(command)
             with open(out0, "w") as f:
-                f.write("invalid command")
+                f.write(com)
             with open(start0, "w") as f:
                 f.write("Done!")
 
@@ -332,4 +337,3 @@ if __name__ == "__main__":
                 User()
             if start == "Exit!":
                 logger.warning("Exit!")
-
