@@ -1,23 +1,3 @@
-#Copyright (c) 2024 Maximilian Gründinger
-
-#Permission is hereby granted, free of charge, to any person obtaining a copy
-#of this software and associated documentation files (the "Software"), to deal
-#in the Software without restriction, including without limitation the rights
-#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#copies of the Software, and to permit persons to whom the Software is
-#furnished to do so, subject to the following conditions:
-
-#The above copyright notice and this permission notice shall be included in all
-#copies or substantial portions of the Software.
-
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-#SOFTWARE.
-
 # import Area
 import time
 import logging
@@ -59,9 +39,9 @@ DIR_LIST = ['terminal', 'terminal-en', 'terminal-en-conf', 'terminal-en-conf-sys
 #Listen von Weiterführung zu DIR
 WEITERDIR_LIST = ['end', 'exit', 'en', 'do', 'show', 'conf -t', 'sys -conf', 'conf -spi', ]
 #Alle Befehle
-ALL_LIST = ['en', 'conf -t', 'conf -sys', 'conf -spi', 'end', 'exit', 'help', 'update', 'do shutdown', 'do bootup', 'do reboot', 'show files', 'show conf', 'show status', "upload '{file_input}'", "download '{file_input}'", "remove '{file_input}'", 'spike charge', 'change permision {user_input} {permision_input}', "exit", "pwd"]
+ALL_LIST = ['en', 'conf -t', 'conf -sys', 'conf -spi', 'end', 'exit', 'help', 'update', 'do shutdown', 'do bootup', 'do reboot', 'show files', 'show conf', 'show status', "upload '{file_input}'", "download '{file_input}'", "remove", 'spike charge', 'change permision', "exit", "pwd", "grep file", "command"]
 #valid combinations
-VALIDS = [(0, 0), (1, 1), (2, 2), (3, 3), (0, 4), (1, 4), (2, 4), (3, 4), (4, 4), (1, 5), (2, 5), (3, 5), (4, 5), (0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (3, 8), (4, 8), (3, 9), (3, 10), (2, 11), (3, 11), (4, 11), (2, 12), (2, 13), (3, 13), (4, 13), (3, 14), (3, 15), (4, 15), (3, 16), (4, 17), (3, 18), (0,20), (1,20), (2,20), (3,20), (4,20)]
+VALIDS = [(0, 0), (1, 1), (2, 2), (3, 3), (0, 4), (1, 4), (2, 4), (3, 4), (4, 4), (1, 5), (2, 5), (3, 5), (4, 5), (0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (3, 8), (4, 8), (3, 9), (3, 10), (2, 11), (3, 11), (4, 11), (2, 12), (2, 13), (3, 13), (4, 13), (3, 14), (3, 15), (4, 15), (3, 16), (4, 17), (3, 18), (0,20), (1,20), (2,20), (3,20), (4,20), (2,21),(3,22)]
 #valid combinations with user
 ADMIN_VALIDS = [(0, 0), (1, 1), (2, 2), (3, 3), (0, 4), (1, 4), (2, 4), (3, 4), (4, 4), (1, 5), (2, 5), (3, 5), (4, 5), (0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (3, 8), (4, 8), (3, 9), (3, 10), (2, 11), (3, 11), (4, 11), (2, 12), (2, 13), (3, 13), (4, 13), (3, 14), (3, 15), (4, 15), (3, 16), (4, 17)]
 
@@ -82,10 +62,10 @@ OUT_LIST = {
     (2, 5): '',
     (3, 5): '',
     (4, 5): '',
-    (0, 6): "en&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Enables&nbsp;the&nbsp;system&nbsp;configuration&nbsp;mode",
+    (0, 6): f"en&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Enables&nbsp;the&nbsp;system&nbsp;configuration&nbsp;mode\n&nbsp;some&nbsp;comands&nbsp;like&nbsp;delet&nbsp;file&nbsp;takes&nbsp;extra&nbsp;Argument&nbsp;with&nbsp;an&nbsp;,&nbsp;&nbsp;lease&nbsp;try&nbsp;to&nbsp;care&nbsp;for&nbsp;under&nbsp;scores",
     (1, 6): f"exit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;terminal</br>\nend&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;terminal</br>\nupdate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;updates&nbsp;the&nbsp;Conntent</br>\nshow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;dir&nbsp;show&nbsp;(files/shows&nbsp;files,&nbsp;status/shows&nbsp;status)</br>\nconf&nbsp;-t/configure&nbsp;terminal&nbsp;&nbsp;-&nbsp;goes to terminal-en-conf</br>",
     (2, 6): f"exit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;terminal</br>\nend&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;terminal</br>\nupdate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;updates&nbsp;the&nbsp;Conntent</br>\ndo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;dir&nbsp;do&nbsp;(shutdown/shutssdown&nbsp;the&nbsp;system,&nbsp;bootup/bootsup&nbsp;the&nbsp;system,&nbsp;reboot/reboots&nbsp;the&nbsp;system)</br>\nsys&nbsp;-conf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;terminal-#-conf-sys</br>",
-    (3, 6): f"exit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;terminal</br>\nend&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;terminal</br>\nupdate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;updates&nbsp;the&nbsp;Conntent</br>\ndo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;dir&nbsp;do&nbsp;(shutdown/shutssdown&nbsp;the&nbsp;system,&nbsp;bootup/bootsup&nbsp;the&nbsp;system,&nbsp;reboot/reboots&nbsp;the&nbsp;system)</br>\n<span class='color2'>upload&nbsp;file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;uploads&nbsp;an&nbsp;file&nbsp;to&nbsp;the&nbsp;server</span></br>\n<span class='color2'>download&nbsp;file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;downloads&nbsp;an&nbsp;file&nbsp;from&nbsp;the&nbsp;server</span></br>\n<span class='color2'>remove&nbsp;file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;removes&nbsp;an&nbsp;file&nbsp;from&nbsp;the&nbsp;server,&nbsp;please&nbsp;enter&nbsp;file&nbsp;DIR</span></br>\n<span class='color2'>config&nbsp;file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;configures&nbsp;an&nbsp;file&nbsp;from&nbsp;the&nbsp;server</span></br>",
+    (3, 6): f"exit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;terminal</br>\nend&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;terminal</br>\nupdate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;updates&nbsp;the&nbsp;Conntent</br>\ndo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;dir&nbsp;do&nbsp;(shutdown/shutssdown&nbsp;the&nbsp;system,&nbsp;bootup/bootsup&nbsp;the&nbsp;system,&nbsp;reboot/reboots&nbsp;the&nbsp;system)</br>\n<span class='color2'>upload&nbsp;file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;uploads&nbsp;an&nbsp;file&nbsp;to&nbsp;the&nbsp;server</span></br>\n<span class='color2'>download&nbsp;file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;downloads&nbsp;an&nbsp;file&nbsp;from&nbsp;the&nbsp;server</span></br>\n<span class='color2'>remove&nbsp;file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;removes&nbsp;an&nbsp;file&nbsp;from&nbsp;the&nbsp;server,&nbsp;please&nbsp;enter&nbsp;file&nbsp;DIR</span></br>\n<span class='color2'>config&nbsp;file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;configures&nbsp;an&nbsp;file&nbsp;from&nbsp;the&nbsp;server</span></br>\ncommand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;admins&nbsp;can&nbsp;enter&nbsp;linux&nbsp;command</br>",
     (4, 6): f"exit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;terminal</br>\nend&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;terminal</br>\nupdate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;updates&nbsp;the&nbsp;Conntent</br>\nshow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;goes&nbsp;to&nbsp;dir&nbsp;show&nbsp;(files/shows&nbsp;files,&nbsp;status/shows&nbsp;status)</br>\nspike&nbsp;charge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;shows&nbsp;spike&nbsp;charge</br>",
     (0, 7): "",
     (1, 7): "",
@@ -112,6 +92,7 @@ OUT_LIST = {
     (2, 20): "terminal-en-conf",
     (3, 20): "terminal-en-conf-sys",
     (4, 20): "terminal-en-conf-sys-spi",
+    (2, 21): f"loading...\n"
 }
 
 class User:
@@ -128,7 +109,12 @@ class User:
                 input1 = f.read().strip()
 
         with open(in0, "r") as file:
-            input1 = file.read().strip()
+            input234 = file.read().strip()
+        
+        input234 = input234.split(", ")
+        user_input = input234[1]
+        imput1 = input234[0]
+        input1 = input1.replace(", ", "")
 
         if not any(element in input1 for element in ALL_LIST):
             null = None 
@@ -147,17 +133,22 @@ class User:
             
         together = (index, index1)
 
-        self.command(together, out0, index, User) # runn's the main logik
+        self.command(together, out0, index, User, user_input) # runn's the main logik
         
-    def command(self, combination, file, index, User):
+    def command(self, combination, file, index, User, variable_input=None):
         if combination == (1,5) or combination == (2,5) or combination == (3,5) or combination == (4,5):
             index -= 1
             self.write_file(dir0,DIR_LIST[index])
         elif combination == (0,19):
             self.write_file(in0, "exit")
             running = False
+        elif combination == (4,22):
+            self.command_os(variable_input)
         elif combination == (3,16):
-            self.file_remove(file_input)
+            self.file_remove(variable_input)
+            self.write_file(start0, "Done!")
+        elif combination == (2,21):
+            self.load_file_inhalt(variable_input)
             self.write_file(start0, "Done!")
         elif combination == (3,10):
             if check_user_admin(User):
@@ -172,7 +163,11 @@ class User:
             else:
                 logger.debug("invalid_command")
         elif combination == (3,18):
-            if check_user_admin(User):
+            if check_user_admin1(User):
+                usre = variable_input.split("-> ")
+                user_input = usre[0]
+                permision_input = usre[1]
+                user_input = user_input.replace("-> ", "")
                 self.change_user_permision(user_input, permision_input)
                 self.write_file(start0, "Done!")
             else:
@@ -189,12 +184,33 @@ class User:
             self.write_file(dir0, OUT_LIST[combination])
             self.write_file(out0, OUT_LIST[combination])
             self.write_file(start0, "Done!")
-        elif combination == (0,6) or combination == (1,6) or combination == (2,6) or combination == (3,6) or combination == (4,6) or combination == (0,7) or combination == (1,7) or combination == (2,7) or combination == (3,7) or combination == (4,7) or combination == (3,8) or combination == (4,8) or combination == (3,9) or combination == (3,10) or combination == (2,11) or combination == (3,11) or combination == (4,11) or combination == (2,12) or combination == (2,13) or combination == (3,13) or combination == (4,13) or combination == (3,14) or combination == (3,15) or combination == (4,15) or combination == (3,16) or combination == (4,17) or combination == (3,18) or combination == (0,20) or combination == (1,20) or combination == (2,20) or combination == (3,20) or combination == (4,20):
+        elif combination == (0,6) or combination == (1,6) or combination == (2,6) or combination == (3,6) or combination == (4,6) or combination == (0,7) or combination == (1,7) or combination == (2,7) or combination == (3,7) or combination == (4,7) or combination == (3,8) or combination == (4,8) or combination == (3,9) or combination == (3,10) or combination == (2,11) or combination == (3,11) or combination == (4,11) or combination == (2,12) or combination == (2,13) or combination == (3,13) or combination == (4,13) or combination == (3,14) or combination == (3,15) or combination == (4,15) or combination == (3,16) or combination == (4,17) or combination == (0,20) or combination == (1,20) or combination == (2,20) or combination == (3,20) or combination == (4,20):
             self.write_file(file, OUT_LIST[combination])
             self.write_file(start0, "Done!")
         else:
             logger.debug("invalid_command")
             self.write_file(out0, "invalid command")
+
+    def command_os(self, command):
+        if check_user_admin(User):
+            com = os.system(command)
+            with open(out0, "w") as f:
+                f.write(com)
+            with open(start0, "w") as f:
+                f.write("Done!")
+        else:
+            with open(out0, "w") as f:
+                f.write("invalid command")
+            with open(start0, "w") as f:
+                f.write("Done!")
+
+    def load_file_inhalt(self, file):
+        if check_user_admin(User):
+            logger.debug("load_file_inhalt_valid")
+            with open(file, "r") as f:
+                self.write_file(out0, f.read())
+        else:
+            logger.debug("load_file_inhalt_invalid")
 
     def file_removefile_path(self, file_path):
         if check_user_admin1(User):
@@ -295,3 +311,4 @@ if __name__ == "__main__":
                 User()
             if start == "Exit!":
                 logger.warning("Exit!")
+
