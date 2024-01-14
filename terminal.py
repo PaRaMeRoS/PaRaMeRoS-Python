@@ -173,15 +173,16 @@ class User:
             self.write_file(in0, "exit")
             running = False
         elif combination == (2,12):
-            with open("/home/web/.pm2/logs/server-error.log", "r") as f:
-                with open("/home/web/.pm2/logs/server-out.log", "r") as f1:
-                    with open("/home/web/.pm2/logs/terminal-error.log", "r") as f2:
-                        with open("/home/web/.pm2/logs/terminal-out.log", "r") as f3:
-                            self.write_file(out0, f3.read())
-                        self.f2.write_file(out0, f2.read())
-                    self.f1.write_file(out0, f1.read())
-                self.write_file(out0, f.read())
-            self.write_file(start0, "Done!")
+            with open(out0, "r") as files:
+                with open("/home/web/.pm2/logs/server-error.log", "r") as f:
+                    with open("/home/web/.pm2/logs/server-out.log", "r") as f1:
+                        with open("/home/web/.pm2/logs/terminal-error.log", "r") as f2:
+                            with open("/home/web/.pm2/logs/terminal-out.log", "r") as f3:
+                                files.write(f.read())
+                                files.write(f1.read())
+                                files.write(f2.read())
+                                files.write(f3.read())
+                self.write_file(start0, "Done!")
         elif combination == (2,11):
             os.system("pm2 flush")
             self.write_file(start0, "Done!")
