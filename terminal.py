@@ -196,8 +196,8 @@ class User:
                                 files.write("<br>")
                 self.write_file(start0, "Done!")
         elif combination == (2,9):
-            os.system("pm2 flush")
             self.write_file(start0, "Done!")
+            os.system("pm2 flush")
         elif combination == (4,22):
             self.command_os(variable_input)
         elif combination == (3,16):
