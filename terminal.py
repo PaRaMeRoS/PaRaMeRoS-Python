@@ -219,6 +219,11 @@ class User:
             logger.debug("invalid_command")
             self.write_file(out0, "invalid command")
 
+    def file_remove(self, file):
+        if check_user_admin(User):
+            logger.debug("file_remove_valid")
+            os.remove(file)
+
     def command_os(self, command):
         if "sudo" in command: # disables sudo for normal user
             if check_user_admin1(User):
@@ -276,12 +281,12 @@ class User:
     def hard_shutdown(self, User):
         if check_user_admin(User):
             logger.debug("hard_shutdown_valid")
-            os.system("shutdown /s /t 1")
+            os.system("reboot -f")
 
     def reboot(self, User):
         if check_user_admin(User):
             logger.debug("reboot_valid")
-            os.system("shutdown /r /t 1")
+            os.system("reboot")
 
     def write_file(self, file, text):
         with open(file, "w") as f:
