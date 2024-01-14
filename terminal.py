@@ -179,8 +179,11 @@ class User:
                         with open("/home/web/.pm2/logs/terminal-error.log", "r") as f2:
                             with open("/home/web/.pm2/logs/terminal-out.log", "r") as f3:
                                 files.write(f.read())
+                                files.write("\n")
                                 files.write(f1.read())
+                                files.write("\n")
                                 files.write(f2.read())
+                                files.write("\n")
                                 files.write(f3.read())
                 self.write_file(start0, "Done!")
         elif combination == (2,11):
