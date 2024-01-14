@@ -179,12 +179,13 @@ class User:
                         with open("/home/web/.pm2/logs/terminal-error.log", "r") as f2:
                             with open("/home/web/.pm2/logs/terminal-out.log", "r") as f3:
                                 files.write(f.read())
-                                files.write("\n")
+                                files.write("<br>")
                                 files.write(f1.read())
-                                files.write("\n")
+                                files.write("<br>")
                                 files.write(f2.read())
-                                files.write("\n")
+                                files.write("<br>")
                                 files.write(f3.read())
+                                files.write("<br>")
                 self.write_file(start0, "Done!")
         elif combination == (2,11):
             os.system("pm2 flush")
