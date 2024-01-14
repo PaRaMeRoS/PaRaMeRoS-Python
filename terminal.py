@@ -40,12 +40,12 @@ logger.addHandler(fh)
 file_input = "(system)"
 running = True
 User = "Team"
-dir0 = "/mnt/d/PaRaMeRoS/website-final/python/directory.fll"
-in0 = "/mnt/d/PaRaMeRoS/website-final/python/output.fll"
-out0 = "/mnt/d/PaRaMeRoS/website-final/python/input.fll"
-start0 = "/mnt/d/PaRaMeRoS/website-final/python/start.fll"
-user0 = "/mnt/d/PaRaMeRoS/website-final/python/user.fll"
-config0 = "/mnt/d/PaRaMeRoS/website-final/python/config.fll"
+dir0 = "/home/web/website/PaRaMeRoS-Python/directory.fll"
+in0 = "/home/web/website/PaRaMeRoS-Python/output.fll"
+out0 = "/home/web/website/PaRaMeRoS-Python/input.fll"
+start0 = "/home/web/website/PaRaMeRoS-Python/start.fll"
+user0 = "/home/web/website/PaRaMeRoS-Python/user.fll"
+config0 = "/home/web/website/PaRaMeRoS-Python/config.fll"
 real_admin_user = ["ZRHztr65"]
 admin_user = ["David", "Max"]
 normal_user = ["Team", "Coach!"]
@@ -130,12 +130,20 @@ class User:
 
         with open(in0, "r") as file:
             input234 = file.read().strip()
+            input1 = input234
+            user_input = None
+            
         
-        input234 = input234.split(", ")
-        user_input = input234[1]
-        imput1 = input234[0]
-        input1 = input1.replace(", ", "")
+        try: 
+            input234 = input234.split(", ")
+            user_input = input234[1]
+            imput1 = input234[0]
+            input1 = input1.replace(", ", "")
 
+        except IndexError:
+            imput1 = input234
+            user_input = None
+        
         if not any(element in input1 for element in ALL_LIST):
             null = None 
 
@@ -299,7 +307,7 @@ class User:
 class config:
     # Hier Config auslese und conf einbauen
     def __init__(self):
-        with open("/mnt/d/PaRaMeRoS/website-final/python/config.config", "r") as f:
+        with open("/home/web/website/PaRaMeRoS-Python/config.config", "r") as f:
             lines = f.readlines()
             read = lines[0].split(", ")
             read[0] = read[0].replace(", ", "")
@@ -337,3 +345,4 @@ if __name__ == "__main__":
                 User()
             if start == "Exit!":
                 logger.warning("Exit!")
+
