@@ -200,6 +200,7 @@ class User:
             os.system("pm2 flush")
         elif combination == (4,22):
             self.command_os(variable_input)
+            self.write_file(start0, "Done!")
         elif combination == (3,16):
             self.file_remove(variable_input)
             self.write_file(start0, "Done!")
@@ -212,12 +213,7 @@ class User:
                 self.reboot(User)
             else:
                 logger.debug("invalid_permision")
-        elif combination == (3,9):
-            if self.check_user_admin1(User):
                 self.write_file(start0, "Done!")
-                self.hard_shutdown(User)
-            else:
-                logger.debug("invalid_command")
         elif combination == (3,18):
             if check_user_admin1(User):
                 usre = variable_input.split("-> ")
