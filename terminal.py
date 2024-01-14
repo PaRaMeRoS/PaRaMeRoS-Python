@@ -173,7 +173,7 @@ class User:
             self.write_file(in0, "exit")
             running = False
         elif combination == (2,12):
-            with open(out0, "r") as files:
+            with open(out0, "w") as files:
                 with open("/home/web/.pm2/logs/server-error.log", "r") as f:
                     with open("/home/web/.pm2/logs/server-out.log", "r") as f1:
                         with open("/home/web/.pm2/logs/terminal-error.log", "r") as f2:
