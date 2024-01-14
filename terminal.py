@@ -195,9 +195,10 @@ class User:
                                 files.write("<br>")
                                 files.write("<br>")
                 self.write_file(start0, "Done!")
-        elif combination == (2,9):
-            self.write_file(start0, "Done!")
+        elif combination == (2,9) or combination == (3,9):
             os.system("pm2 flush")
+            self.write_file(out0, OUT_LIST[combination])
+            self.write_file(start0, "Done!")
         elif combination == (4,22):
             self.command_os(variable_input)
             self.write_file(start0, "Done!")
