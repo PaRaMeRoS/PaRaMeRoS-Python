@@ -187,7 +187,7 @@ class User:
                                 files.write(f3.read())
                                 files.write("<br>")
                 self.write_file(start0, "Done!")
-        elif combination == (2,11):
+        elif combination == (2,9):
             os.system("pm2 flush")
             self.write_file(start0, "Done!")
         elif combination == (4,22):
