@@ -166,7 +166,9 @@ class User:
     def command(self, combination, file, index, User, variable_input=None):
         if combination == (1,5) or combination == (2,5) or combination == (3,5) or combination == (4,5):
             index -= 1
+            self.write_file(out0, "")
             self.write_file(dir0,DIR_LIST[index])
+            self.write_file(start0, "Done!")
         elif combination == (0,19):
             self.write_file(in0, "exit")
             running = False
