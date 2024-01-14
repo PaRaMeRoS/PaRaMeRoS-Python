@@ -96,7 +96,7 @@ OUT_LIST = {
     (4, 8): "",
     (3, 9): "flusching...",
     (3, 10): "Rebooting...",
-    (2, 12): f"Configuration:\n{config0}",
+    (2, 12): "",
     (2, 13): "Status:&nbsp;No&nbsp;Problems&nbsp;recorded",
     (3, 13): "Status:&nbsp;Online&nbsp;and&nbsp;running",
     (4, 13): "Status:&nbsp;Online",
@@ -172,7 +172,7 @@ class User:
         elif combination == (0,19):
             self.write_file(in0, "exit")
             running = False
-        elif combination == (1,18):
+        elif combination == (2,12):
             with open("/home/web/.pm2/logs/server-error.log", "r") as f:
                 with open("/home/web/.pm2/logs/server-out.log", "r") as f1:
                     with open("/home/web/.pm2/logs/terminal-error.log", "r") as f2:
