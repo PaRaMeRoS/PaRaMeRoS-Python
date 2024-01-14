@@ -242,6 +242,7 @@ class User:
         else:
             logger.debug("invalid_command")
             self.write_file(out0, "invalid command")
+            self.write_file(start0, "Done!")
 
     def file_remove(self, file):
         if check_user_admin(User):
