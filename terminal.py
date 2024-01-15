@@ -64,9 +64,9 @@ DIR_LIST = ['terminal', 'terminal-en', 'terminal-en-conf', 'terminal-en-conf-sys
 #Listen von Weiterführung zu DIR
 WEITERDIR_LIST = ['end', 'exit', 'en', 'do', 'show', 'conf -t', 'sys -conf', 'conf -spi', ]
 #Alle Befehle
-ALL_LIST = ['en', 'conf -t', 'conf -sys', 'conf -spi', 'end', 'exit', 'help', 'update', 'do shutdown', 'do flush', 'do reboot', 'show files', 'show log', 'show status', "upload '{file_input}'", "download '{file_input}'", "remove", 'spike charge', 'change permision', "exit_script", "pwd", "grep file", "command"]
+ALL_LIST = ['en', 'conf -t', 'conf -sys', 'conf -spi', 'end', 'exit', 'help', 'update', 'do shutdown', 'do flush', 'do reboot', 'show files', 'show log', 'show status', "upload '{file_input}'", "download '{file_input}'", "remove", 'spike charge', 'change permision', "exit_script", "pwd", "grep file", "command", "Algorithmus"]
 #valid combinations
-VALIDS = [(0, 0), (1, 1), (2, 2), (3, 3), (0, 4), (1, 4), (2, 4), (3, 4), (4, 4), (1, 5), (2, 5), (3, 5), (4, 5), (0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (3, 8), (4, 8), (3, 9), (3, 10), (2, 11), (3, 11), (4, 11), (2, 12), (2, 13), (3, 13), (4, 13), (3, 14), (3, 15), (4, 15), (3, 16), (4, 17), (3, 18), (0,20), (1,20), (2,20), (3,20), (4,20), (2,21),(3,22)]
+VALIDS = [(0, 0), (1, 1), (2, 2), (3, 3), (0, 4), (1, 4), (2, 4), (3, 4), (4, 4), (1, 5), (2, 5), (3, 5), (4, 5), (0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (3, 8), (4, 8), (3, 9), (3, 10), (2, 11), (3, 11), (4, 11), (2, 12), (2, 13), (3, 13), (4, 13), (3, 14), (3, 15), (4, 15), (3, 16), (4, 17), (3, 18), (0,20), (1,20), (2,20), (3,20), (4,20), (2,21),(3,22),(0,23)]
 #valid combinations with user
 ADMIN_VALIDS = [(0, 0), (1, 1), (2, 2), (3, 3), (0, 4), (1, 4), (2, 4), (3, 4), (4, 4), (1, 5), (2, 5), (3, 5), (4, 5), (0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (3, 8), (4, 8), (3, 9), (3, 10), (2, 11), (3, 11), (4, 11), (2, 12), (2, 13), (3, 13), (4, 13), (3, 14), (3, 15), (4, 15), (3, 16), (4, 17)]
 
@@ -117,7 +117,8 @@ OUT_LIST = {
     (2, 20): "terminal-en-conf",
     (3, 20): "terminal-en-conf-sys",
     (4, 20): "terminal-en-conf-sys-spi",
-    (2, 21): f"loading...\n"
+    (2, 21): f"loading...\n",
+    (0, 23): "load&nbsp;->&nbsp;load&nbsp;a&nbsp;project<br>create&nbsp;->&nbsp;create&nbsp;a&nbsp;new&nbsp;project<br>exit&nbsp;->&nbsp;exit&nbsp;the&nbsp;programm<br>help&nbsp;->&nbsp;show&nbsp;this&nbsp;help<br>info&nbsp;->&nbsp;show&nbsp;info&nbsp;about&nbsp;the&nbsp;programm<br>Version:&nbsp;v.2.2.1<br>&nbsp;Author:&nbsp;Maximilian&nbsp;Gründinger<br>Date:&nbsp;2021-08-15<br>License:&nbsp;Custom&nbsp;MIT",
 }
 
 class User:
