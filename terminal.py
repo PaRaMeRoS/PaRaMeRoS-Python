@@ -118,6 +118,7 @@ OUT_LIST = {
     (3, 20): "terminal-en-conf-sys",
     (4, 20): "terminal-en-conf-sys-spi",
     (2, 21): f"loading...\n",
+    (2, 9): "flushing...",
     (0, 23): "load&nbsp;->&nbsp;load&nbsp;a&nbsp;project<br>create&nbsp;->&nbsp;create&nbsp;a&nbsp;new&nbsp;project<br>exit&nbsp;->&nbsp;exit&nbsp;the&nbsp;programm<br>help&nbsp;->&nbsp;show&nbsp;this&nbsp;help<br>info&nbsp;->&nbsp;show&nbsp;info&nbsp;about&nbsp;the&nbsp;programm<br>Version:&nbsp;v.2.2.1<br>&nbsp;Author:&nbsp;Maximilian&nbsp;Gründinger<br>Date:&nbsp;2021-08-15<br>License:&nbsp;Custom&nbsp;MIT",
 }
 
